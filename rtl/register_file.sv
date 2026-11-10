@@ -1,12 +1,12 @@
 module register_file (
-	input logic clk,
-	input logic write_enable,
-	input logic [4:0] read_addr1,
-	input logic [4:0] read_addr2,
-	input logic [4:0] write_addr,
-	input logic [31:0] write_data,
-	output logic [31:0] read_data1,
-	output logic [31:0] read_data2
+    input logic clk,
+    input logic write_enable,
+    input logic [4:0] read_addr1,
+    input logic [4:0] read_addr2,
+    input logic [4:0] write_addr,
+    input logic [31:0] write_data,
+    output logic [31:0] read_data1,
+    output logic [31:0] read_data2
 );
 logic [31:0] regs [0:31];
 

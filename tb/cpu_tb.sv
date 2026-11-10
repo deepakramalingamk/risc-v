@@ -2,30 +2,30 @@
 
 module tb_cpu;
 
-    logic        clk;
-    logic        reset;
+    logic clk;
+    logic reset;
 
     logic [31:0] instruction_address;
     logic [31:0] instruction;
 
-    logic        MemRead;
-    logic        MemWrite;
-    logic [2:0]  memory_funct3;
+    logic MemRead;
+    logic MemWrite;
+    logic [2:0] memory_funct3;
     logic [31:0] memory_address;
     logic [31:0] memory_write_data;
     logic [31:0] memory_read_data;
 
     cpu dut (
-        .clk                 (clk),
-        .reset               (reset),
+        .clk (clk),
+        .reset (reset),
         .instruction_address (instruction_address),
-        .instruction         (instruction),
-        .MemRead             (MemRead),
-        .MemWrite            (MemWrite),
-        .memory_funct3       (memory_funct3),
-        .memory_address      (memory_address),
-        .memory_write_data   (memory_write_data),
-        .memory_read_data    (memory_read_data)
+        .instruction (instruction),
+        .MemRead (MemRead),
+        .MemWrite (MemWrite),
+        .memory_funct3 (memory_funct3),
+        .memory_address (memory_address),
+        .memory_write_data (memory_write_data),
+        .memory_read_data (memory_read_data)
     );
 
     
@@ -33,20 +33,20 @@ instruction_memory #(
     .WORDS(1024),
     .INIT_FILE("program.hex")
 ) imem (
-    .read_addr   (instruction_address),
+    .read_addr (instruction_address),
     .instruction (instruction)
 );
 
 dmemory #(
     .BYTES(4096)
 ) dmem (
-    .clk         (clk),
-    .MemWrite    (MemWrite),
-    .MemRead     (MemRead),
-    .address     (memory_address),
-    .write_data  (memory_write_data),
-    .instruction (instruction),
-    .read_data   (memory_read_data)
+    .clk (clk),
+    .MemWrite (MemWrite),
+    .MemRead (MemRead),
+    .address (memory_address),
+    .write_data (memory_write_data),
+    .funct3 (memory_funct3),
+    .read_data (memory_read_data)
 );
     initial begin
         $dumpfile("cpu.vcd");

@@ -1,7 +1,7 @@
 module program_counter (
-    input  logic        clk,
-    input  logic        PCSrc,
-    input  logic [31:0] branch_imm,
+    input logic clk,
+    input logic PCSrc,
+    input logic [31:0] branch_imm,
     output logic [31:0] PC
 );
 
@@ -11,9 +11,9 @@ module program_counter (
     logic [31:0] next_PC;
 
     always_comb begin
-        PC_plus_4          = PC + 32'd4;
+        PC_plus_4 = PC + 32'd4;
         shifted_branch_imm = {branch_imm[30:0], 1'b0};
-        branch_target      = PC + shifted_branch_imm;
+        branch_target = PC + shifted_branch_imm;
 
         if (PCSrc)
             next_PC = branch_target;
